@@ -1,10 +1,10 @@
 #include <Windows.h>
 #include <stdio.h>
-#include "../include/aes.h"
+#include "../../include/aes.h"
 
 //#define AES128 1
-#define AES192 1
-//#define AES256 1
+//#define AES192 1
+#define AES256 1
 
 
 
