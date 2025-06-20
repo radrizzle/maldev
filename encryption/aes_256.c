@@ -1,6 +1,6 @@
 #include <Windows.h>
 #include <stdio.h>
-#include "headers/aes.h"
+#include "../include/aes.h"
 
 //#define AES128 1
 //#define AES192 1
@@ -11,31 +11,8 @@
 #define KEYSIZE 32
 #define IVSIZE 16
 
-BOOL PaddBuffer(IN PBYTE InputBuffer, IN SIZE_T InputBufferSize, OUT PBYTE* OutputPaddedBuffer, OUT SIZE_T* OutputPaddedSize) {
 
-	PBYTE	PaddedBuffer        = NULL;
-	SIZE_T	PaddedSize          = NULL;
-
-	// calculate the nearest number that is multiple of 16 and saving it to PaddedSize
-	PaddedSize = InputBufferSize + 16 - (InputBufferSize % 16);
-	// allocating buffer of size "PaddedSize"
-	PaddedBuffer = (PBYTE)HeapAlloc(GetProcessHeap(), 0, PaddedSize);
-	if (!PaddedBuffer){
-		return FALSE;
-	}
-	// cleaning the allocated buffer
-	ZeroMemory(PaddedBuffer, PaddedSize);
-	// copying old buffer to new padded buffer
-	memcpy(PaddedBuffer, InputBuffer, InputBufferSize);
-	//saving results :
-	*OutputPaddedBuffer = PaddedBuffer;
-	*OutputPaddedSize   = PaddedSize;
-
-	return TRUE;
-}
-
-// AES Encryption Function, 
-char* AESEncrypt(unsigned char* Data, unsigned char* Mode){
+char* AES256_Encrypt(unsigned char* Data){
 
 // struct needed for Tiny-AES library
 	struct AES_ctx ctx;
@@ -83,10 +60,5 @@ char* AESEncrypt(unsigned char* Data, unsigned char* Mode){
 	}
 	system("PAUSE");
 	return 0;
-
-}
-
-
-int main(int argc, char *argv){
 
 }
